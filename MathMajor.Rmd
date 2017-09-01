@@ -7,29 +7,27 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(igraph)
 ```
 
-## R Markdown
+## The Major
+```{r flowChart}
+MAT<-read_graph("MAT.ncol",format="ncol",directed=TRUE)
+MAT<-union(MAT, read_graph("Majors/MAT.ncol",format="ncol",directed=TRUE))
+MAT<-delete.vertices(MAT,c("MAT-091","MAT-110", "MAT-111","MAT-113", "MAT-117", "MAT-124", "MAT-115", "MAT-391", "MAT-Major"))
+MAT<-add.edges(MAT,c("CIT-115","CIT-225"), weight=1)
+layers<-list(c("MAT-Sr"), 
+             c( "MAT-450", "MAT-460" ,"MAT-495", "MAT-Wing"),
+             c("MAT-490",  "MAT-390"),
+             c("High Math"),
+             c( "MAT-370", "MAT-380", "MAT-395","MAT-220","MAT-310"),
+             c("Upper Math"), 
+ 
+             c(),
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+              c( "EDU-353", "CIT-225", "PHY-223"),
+             c("MAT-230", "MAT-250", "MAT-260"),
+             c("CIT-115", "MAT-150", "MAT-160"))
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
-
-## Slide with Bullets
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-```{r cars, echo = TRUE}
-summary(cars)
+plot(MAT, layout=layout_with_sugiyama(MAT, layers=apply(sapply(layers,                                                               function(x) V(MAT)$name %in% x), 1, which))$layout)
 ```
-
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
-```
-
