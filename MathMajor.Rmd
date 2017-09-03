@@ -8,6 +8,7 @@ output: ioslides_presentation
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(igraph)
+#library(GGally)
 ```
 
 ## The Major
@@ -33,6 +34,5 @@ V(MAT)$size2 <- 10
 V(MAT)$label <- lapply(V(MAT)$name, function(x)
                       paste(strwrap(x, 12), collapse="\n"))
 E(MAT)$arrow.size <- 0.5
-lay1 <- layout_with_sugiyama(MAT, layers=apply(sapply(layers,                                                               function(x) V(MAT)$name %in% x), 1, which), attributes="all")
-plot(MAT, layout=lay1$layout)
+#ggnet2(MAT)
 ```
