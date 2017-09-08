@@ -33,9 +33,9 @@ n %v% "level" <- c("Core", "Core", "Core", "Wing",
                    "Wing", "Upper", "Upper", "Core",
                    "Wing")
 
-locations<-matrix(c( 0.25, 0.25,   0.75, 0.3,   0.5, 0.5,   0, 0.75,
+locations<-matrix(c( 0.25, 0.25,   0.75, 0.3,   0.15, 0.5,   0, 0.75,
                      1.25, 1,   0.45, 1.25,   0.65, 1.05,    1, 1.15,
-                     1.25, 1.75,   0.85, 1.65,    0.25, 1.75,   0.45, 2.2,
+                     1.35, 1.7,   0.85, 1.65,    0.25, 1.75,   0.45, 2.2,
                      0, 2.05,   0.15, 2.5,    0.85, 2.5,   0.5, 3,
                      0, 1.5), ncol=2, byrow = TRUE)
 PreReqs <- data.frame(needed_id= parse_factor(c("MAT 150", "MAT 150", "MAT 150", "MAT 150",
@@ -105,4 +105,36 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 - At least four of Lower, Middle, or Uppper
 
 
+## Rotation of Classes
 
+```{r When, results="asis"}
+class_schedule <- data_frame(Code = c("MAT 150", "MAT 160", "CIT 115", "PHY 223",
+                       "MAT 220", "MAT 230", "MAT 250", "MAT 260",
+                       "MAT 310", "MAT 370", "MAT 380", "MAT 390",
+                       "EDU 353", "MAT 450", "MAT 460", "MAT 490", 
+                       "CIT 225"),
+                       
+                       Title = c("Calc I", "Calc II", "Intro to Programming", "Physics for Mathematicians",
+                       "Prob/Stats", "Discrete Math", "Linear Algebra", "Multivariable Calc",
+                       "ODEs", "Modern Geometry", "Numerical Analysis", "Seminar",
+                       "Math Methods", "Algebra", "Real Analysis", "Capstone",
+                       "Data Structures and Algorithms"), 
+                       
+                       Semester = c("Every", "Every","Every","Fall",
+                       "Spring", "Spring", "Fall", "Every",
+                       "Fall", "Odd Springs", "Odd Falls", "Every",
+                       "Even Falls", "Even Falls", "Odd Falls", "Spring",
+                       "Every")
+                       )
+                       
+class_schedule %>% filter(Semester != "Every") %>% slice(1:6) %>%  knitr::kable()
+
+```
+
+
+## Rotation of Classes
+
+```{r When2, results="asis"}
+class_schedule %>% filter(Semester != "Every") %>% slice(7:n()) %>%  knitr::kable()
+
+```

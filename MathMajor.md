@@ -22,4 +22,26 @@ Matt Rissler
 - At least four of Lower, Middle, or Uppper
 
 
+## Rotation of Classes
 
+
+Code      Title                        Semester    
+--------  ---------------------------  ------------
+PHY 223   Physics for Mathematicians   Fall        
+MAT 220   Prob/Stats                   Spring      
+MAT 230   Discrete Math                Spring      
+MAT 250   Linear Algebra               Fall        
+MAT 310   ODEs                         Fall        
+MAT 370   Modern Geometry              Odd Springs 
+
+
+## Rotation of Classes
+
+
+Code      Title                Semester   
+--------  -------------------  -----------
+MAT 380   Numerical Analysis   Odd Falls  
+EDU 353   Math Methods         Even Falls 
+MAT 450   Algebra              Even Falls 
+MAT 460   Real Analysis        Odd Falls  
+MAT 490   Capstone             Spring     
