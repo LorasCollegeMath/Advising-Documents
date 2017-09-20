@@ -1,10 +1,11 @@
 ---
 title: "Math Major"
 author: "Matt Rissler"
-date: "`r format(Sys.Date())`"
-output: 
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation: default
   ioslides_presentation:
-    keep_md: true
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +18,7 @@ library(forcats)
 library(grid)
 ```
 
-## The Major
+## The Major-Start Odd Year
 
 ```{r PreReqs, include=FALSE}
 
@@ -33,11 +34,11 @@ n %v% "level" <- c("Core", "Core", "Core", "Wing",
                    "Wing", "Upper", "Upper", "Core",
                    "Wing")
 
-locations<-matrix(c( 0.25, 0.25,   0.75, 0.3,   0.15, 0.5,   0, 0.75,
-                     1.25, 1,   0.45, 1.25,   0.65, 1.05,    1, 1.15,
-                     1.35, 1.7,   0.85, 1.65,    0.25, 1.75,   0.45, 2.2,
-                     0, 2.05,   0.15, 2.5,    0.85, 2.5,   0.5, 3,
-                     0, 1.5), ncol=2, byrow = TRUE)
+locations<-matrix(c( 0.75, 0.25,   0.75, 0.75,   0.25, 0.25,   0, 1.25,
+                     1, 0.75,   0.3, 0.75,   0.6, 1.25,    1, 1.25,
+                     1, 1.75,   0.76, 1.75,    0.31, 2.25,   0.7, 2.25,
+                     0.85, 3.25,   0.15, 3.25,    0, 2.25,   0.5, 3.75,
+                     0, 1.75), ncol=2, byrow = TRUE)
 PreReqs <- data.frame(needed_id= parse_factor(c("MAT 150", "MAT 150", "MAT 150", "MAT 150",
                                    "MAT 160", "MAT 160", "MAT 160", "MAT 160", "MAT 160", "MAT 160",
                                    "CIT 115", "CIT 115", "CIT 115","CIT 115",
@@ -72,7 +73,7 @@ net<-ggnetwork(n, layout=locations)
  
 g <- rasterGrob(colorRampPalette(c("mediumpurple1", "yellow"))(8), 
                 width=unit(1,"npc"), height = unit(1,"npc"), 
-                interpolate = TRUE) 
+                interpolate = FALSE) 
 net$type<- parse_factor(net$type, c("Pre", "Option", "Pre/Co"))
 ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
   annotation_custom(g, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
@@ -106,7 +107,7 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 
 
 ## Rotation of Classes
-
+Courses that are not listed occur every semester.
 ```{r When, results="asis"}
 class_schedule <- data_frame(Code = c("MAT 150", "MAT 160", "CIT 115", "PHY 223",
                        "MAT 220", "MAT 230", "MAT 250", "MAT 260",
@@ -122,19 +123,19 @@ class_schedule <- data_frame(Code = c("MAT 150", "MAT 160", "CIT 115", "PHY 223"
                        
                        Semester = c("Every", "Every","Every","Fall",
                        "Spring", "Spring", "Fall", "Every",
-                       "Fall", "Odd Springs", "Odd Falls", "Every",
+                       "Spring", "Odd Falls", "Odd Springs", "Every",
                        "Even Falls", "Even Falls", "Odd Falls", "Spring",
                        "Every")
                        )
                        
-class_schedule %>% filter(Semester != "Every") %>% slice(1:6) %>%  knitr::kable()
+class_schedule %>% filter(Semester != "Every") %>% slice(1:5) %>%  knitr::kable()
 
 ```
 
 
 ## Rotation of Classes
 
-```{r When2, results="asis"}
-class_schedule %>% filter(Semester != "Every") %>% slice(7:n()) %>%  knitr::kable()
+```{r When2, results="asis", dependson="When"}
+class_schedule %>% filter(Semester != "Every") %>% slice(6:n()) %>%  knitr::kable()
 
 ```
