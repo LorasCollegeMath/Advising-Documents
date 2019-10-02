@@ -1,11 +1,14 @@
 ---
 title: "Math Major"
 author: "Matt Rissler"
-date: '`r format(Sys.Date())`'
+date: "`r format(Sys.Date())`"
 output:
-  beamer_presentation: default
+  word_document: 
+    fig_width: 7
+  html_document: default
   ioslides_presentation:
     keep_md: yes
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -18,14 +21,14 @@ library(forcats)
 library(grid)
 ```
 
-## The Major-Start Odd Year
+## The Major
 
 ```{r PreReqs, include=FALSE}
 
 n<-network.initialize(17)
 network.vertex.names(n)<-c("MAT 150", "MAT 160", "CIT 115", "PHY 223",
                        "MAT 220", "MAT 230", "MAT 250", "MAT 260",
-                       "MAT 310", "MAT 370", "MAT 380", "MAT 390",
+                       "MAT 310", "MAT 420", "MAT 380", "MAT 390",
                        "EDU 353", "MAT 450", "MAT 460", "MAT 490", 
                        "CIT 225")
 n %v% "level" <- c("Core", "Core", "Core", "Wing", 
@@ -40,25 +43,28 @@ locations<-matrix(c( 0.75, 0.25,   0.75, 0.75,   0.25, 0.25,   0, 1.25,
                      0.85, 3.25,   0.15, 3.25,    0, 2.25,   0.5, 3.75,
                      0, 1.75), ncol=2, byrow = TRUE)
 PreReqs <- data.frame(needed_id= parse_factor(c("MAT 150", "MAT 150", "MAT 150", "MAT 150",
-                                   "MAT 160", "MAT 160", "MAT 160", "MAT 160", "MAT 160", "MAT 160",
-                                   "CIT 115", "CIT 115", "CIT 115","CIT 115",
+                                   "MAT 160", "MAT 160", "MAT 160", "MAT 160", "MAT 160",
+                                   "CIT 115", "CIT 115", "CIT 115",
+                                   "MAT 220",
                                    "MAT 230", "MAT 230","MAT 230","MAT 230","MAT 230",
-                                   "MAT 250", "MAT 250","MAT 250","MAT 250",
-                                   "MAT 260", "MAT 260", "MAT 390"),
+                                   "MAT 250", "MAT 250","MAT 250","MAT 250", "MAT 250",
+                                   "MAT 260", "MAT 260", "MAT 260", "MAT 390"),
                                    network.vertex.names(n)), 
                       for_id=    parse_factor(c("MAT 160", "MAT 220", "MAT 230", "MAT 250",
-                                   "MAT 310", "MAT 220", "MAT 230", "MAT 260", "MAT 370", "PHY 223",
-                                   "CIT 225", "MAT 220", "MAT 230", "MAT 370",
+                                   "MAT 310", "MAT 220", "MAT 230", "MAT 260", "PHY 223",
+                                   "CIT 225", "MAT 220", "MAT 230",
+                                   "MAT 420",
                                    "MAT 380", "MAT 390", "MAT 450", "MAT 460", "MAT 490",
-                                   "MAT 390", "MAT 450", "MAT 460", "MAT 490",
-                                   "MAT 390", "MAT 490", "MAT 490"),
+                                   "MAT 390", "MAT 450", "MAT 460", "MAT 490", "MAT 420",
+                                   "MAT 390", "MAT 490", "MAT 420", "MAT 490"),
                                    network.vertex.names(n)),
                       type =     c("Pre","Pre","Pre","Pre",
-                                   "Pre", "Option", "Option","Pre", "Pre","Pre",
-                                   "Pre", "Option", "Option", "Pre",
+                                   "Pre", "Option", "Option","Pre", "Pre",
+                                   "Pre", "Option", "Pre",
+                                   "Pre",
                                    "Pre","Pre","Pre","Pre","Pre",
-                                   "Pre/Co","Pre/Co","Pre/Co","Pre",
-                                   "Pre", "Pre", "Pre"),
+                                   "Pre/Co","Pre/Co","Pre/Co","Pre", "Option",
+                                   "Pre", "Pre", "Option", "Pre"),
                       stringsAsFactors = FALSE
                       )
 
@@ -111,7 +117,7 @@ Courses that are not listed occur every semester.
 ```{r When, results="asis"}
 class_schedule <- data_frame(Code = c("MAT 150", "MAT 160", "CIT 115", "PHY 223",
                        "MAT 220", "MAT 230", "MAT 250", "MAT 260",
-                       "MAT 310", "MAT 370", "MAT 380", "MAT 390",
+                       "MAT 310", "MAT 380", "MAT 420", "MAT 390",
                        "EDU 353", "MAT 450", "MAT 460", "MAT 490", 
                        "CIT 225"),
                        
